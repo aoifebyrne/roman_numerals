@@ -1,0 +1,32 @@
+def solution(roman):
+    inttorom = ""
+    sroman=str(roman)
+    length = len(sroman)
+    starter=sroman
+    
+    if length<4:
+        starter=(4-length)*'0' 
+        starter+=sroman
+
+    inttorom+=int(starter[0])*'M'
+    inttorom+=int(starter[1])*'C'
+    inttorom+=int(starter[2])*'X'
+    inttorom+=int(starter[3])*'I'
+
+
+    fours=['CD','XL','IV']
+    fives= ['D','L', 'V']
+    nines= ['CM','XC','IX']
+    baseten=['M','C','X', 'I']
+
+
+    for letter in baseten:
+        if letter*9 in inttorom:
+            inttorom=inttorom.replace(letter*9, nines[baseten.index(letter)-1] )
+
+        elif letter*5 in inttorom:
+            inttorom=inttorom.replace(letter*5, fives[baseten.index(letter)-1] )
+        elif letter*4 in inttorom:
+            inttorom=inttorom.replace(letter*4, fours[baseten.index(letter)-1] )
+    
+    return inttorom
